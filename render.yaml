@@ -37,12 +37,9 @@ services:
 
   - type: redis
     name: freelance-redis
-    ipAllowList:
-      - source: freelance-api
 
 databases:
   - name: freelance-mongo
     databaseName: freelance
     user: freelanceuser
-    ipAllowList:
-      - source: freelance-api
+    ipAllowList: []   # ⬅️ Only internal access allowed
