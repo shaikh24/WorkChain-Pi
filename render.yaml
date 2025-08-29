@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: freelance-web
+    env: static
+    buildCommand: cd apps/web && pnpm install && pnpm build
+    staticPublishPath: apps/web/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://freelance-api.onrender.com/api
+
+  - type: web
+    name: freelance-api
+    env: node
+    buildCommand: cd apps/api && pnpm install && pnpm build
+    startCommand: node dist/server.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PI_ENV
+        value: mock
+      - key: CORS_ORIGIN
+        value: https://freelance-web.onrender.com
+
+databases:
+  - name: freelance-mongo
+    databaseName: freelance
+    user: freelanceuser
+
+redis:
+  - name: freelance-redis
