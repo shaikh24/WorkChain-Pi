@@ -20,9 +20,14 @@ services:
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        sync: false
+        fromDatabase:
+          name: freelance-mongo
+          property: connectionString
       - key: REDIS_URL
-        sync: false
+        fromService:
+          name: freelance-redis
+          type: redis
+          property: connectionString
       - key: JWT_SECRET
         sync: false
       - key: PI_ENV
@@ -35,5 +40,6 @@ databases:
     databaseName: freelance
     user: freelanceuser
 
-redis:
-  - name: freelance-redis
+services:
+  - type: redis
+    name: freelance-redis
