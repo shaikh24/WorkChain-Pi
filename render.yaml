@@ -35,11 +35,10 @@ services:
       - key: CORS_ORIGIN
         value: https://freelance-web.onrender.com
 
+  - type: redis
+    name: freelance-redis
+
 databases:
   - name: freelance-mongo
     databaseName: freelance
     user: freelanceuser
-
-services:
-  - type: redis
-    name: freelance-redis
